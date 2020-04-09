@@ -9,10 +9,8 @@ import com.weborders.utilities.ConfigurationReader;
 import com.weborders.utilities.Driver;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
+
 import java.io.IOException;
 
 
@@ -45,8 +43,10 @@ public abstract class AbstractBaseTest {
     }
 
     @BeforeMethod
-    public void setup() {
-        driver = Driver.getDriverPool();
+    @Parameters("browser")
+    public void setup(@Optional String browser) {
+        System.out.println("Browser type: " + browser);
+        driver = browser == null ? Driver.getDriver() : Driver.getDriver(browser);
         driver.get(ConfigurationReader.getProperty("url"));
         driver.manage().window().maximize();
     }
