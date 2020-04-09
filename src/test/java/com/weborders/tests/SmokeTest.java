@@ -4,6 +4,7 @@ import com.weborders.pages.LoginPage;
 
 import static org.testng.Assert.*;
 
+import com.weborders.utilities.BrowserUtilities;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -15,6 +16,7 @@ public class SmokeTest extends AbstractBaseTest {
 
         LoginPage loginPage = new LoginPage();
         loginPage.login();
+        BrowserUtilities.wait(2);
         loginPage.navigateTo(component);
         assertEquals(loginPage.getPageSubtitleText(), expectedPageSubTitle);
 
