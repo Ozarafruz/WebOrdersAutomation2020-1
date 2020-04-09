@@ -17,13 +17,20 @@ public class Driver {
 
     }
 
+    /**
+     * synchronized makes method thread safe. It ensure that only 1 thread can use it at the time.
+     *
+     * Thread safety reduce performance but it makes everything safe.
+     *
+     * @return
+     */
     public synchronized static WebDriver getDriverPool() {
         //if webdriver object doesn't exist
         //create it
         if (driverPool.get() == null) {
             //specify browser type in configuration.properties file
             String browser = ConfigurationReader.getProperty("browser").toLowerCase();
-
+          //  synchronized (driverPool);
             switch (browser) {
                 case "chrome":
                     WebDriverManager.chromedriver().version("79").setup();
